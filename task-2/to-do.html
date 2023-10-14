@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .card-1{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction:column ;
+            justify-content: center;
+            align-items: center;
+            background:linear-gradient(to right,rgba(0,0,0,.5),rgb(32, 221, 242)),url(./../img/pexels-photo-5912280.jpeg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .card-2{
+            width: 50vw;
+            padding: 20px;
+            min-height: 50vh;
+            border-radius: 20px;
+            background-color: aliceblue;
+        } 
+        .heading{
+            color: teal;
+            background-color: rgb(193, 208, 193);
+            padding: 10px;
+            border-radius: 10px;
+            margin: 0px 10px;
+            text-align: center;
+            margin: 20px;
+        }
+        .inputs{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .input-1{
+            border-radius: 10px 0px 0px 10px;
+            padding: 10px;
+            border: 1px solid orange ;
+            /* width: 80%; */
+        }
+        .btn{
+            padding: 10px;
+            border: 1px solid orange;
+            background-color: orange;
+            border-radius: 0px 10px 10px 0px;
+            cursor: pointer;
+            color: antiquewhite;
+            font-weight: bold;
+            outline: none;
+        }
+        .input-1:focus{
+            background-color: rgb(200, 211, 138);
+            outline: none;
+
+        }
+        ul li{
+            list-style-type: none;
+            font-size: 17px;
+            padding: 12px 8px 12px 50px;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+
+        }
+        ul li::before{
+            content: '';
+            position: absolute;
+            user-select: none;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background-image: url(/img/unchecked-17.png);
+            background-size: cover;
+            top: 10px;
+            left: 8px;
+
+
+        }
+        ul li.checked{
+            color: #555;
+            text-decoration: line-through;
+        }
+        ul li.checked::before{
+            background-image: url(/img/checked.png);
+            background-size: cover;
+        }
+        ul li span{
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 40px;
+            height: 40px;
+            font-size: 22px;
+            color: #555;
+            line-height: 40px;
+            text-align:center;
+            border-radius: 50%;
+        }
+        ul li span:hover{
+            background: #edeef0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card-1">
+        <div class="card-2">
+            <div class="heading">
+                <h1>TO-DO List  <i class="fa fa-list"></i></h1>
+            </div>
+            <div class="inputs">
+                <input type="text" class="input-1" id="input-box" placeholder="add your task">
+                <button type="submit" class="btn" onclick="addtask()">Add</button>
+            </div>
+            <ul id="list-container">
+                <!-- <li class="checked">Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li> -->
+            </ul>
+           
+        </div>
+    </div>
+    <script>
+        let inputbox=document.getElementById("input-box")
+        let list=document.getElementById("list-container")
+        function addtask(){
+            if(inputbox.value===''){
+                alert("you must enter the correct task")
+            }
+            else{
+                let li=document.createElement("li")
+                li.innerHTML=inputbox.value
+                list.appendChild(li)
+                let span=document.createElement("span")
+                span.innerHTML="\u00d7"
+                li.appendChild(span)
+            }
+            inputbox.value=""
+        }
+        list.addEventListener("click",function(e){
+            if(e.target.tagName === "LI"){
+                e.target.classList.toggle("checked");
+
+            }
+            else if(e.target.tagName === "SPAN"){
+                e.target.parentElement.remove();
+            }
+        },false)
+    </script>
+</body>
+</html>
